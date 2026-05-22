@@ -29,11 +29,11 @@ import {
   TooltipTrigger
 } from '@/components/ui/tooltip';
 import { Analytics } from '@vercel/analytics/react';
-import { User } from './user';
+// import { User } from './user';
 import { VercelLogo } from '@/components/icons';
 import Providers from './providers';
 import { NavItem } from './nav-item';
-import { SearchInput } from './search';
+// import { SearchInput } from './search';
 
 export default function DashboardLayout({
   children
@@ -42,13 +42,14 @@ export default function DashboardLayout({
 }) {
   return (
     <Providers>
-      <main className="flex min-h-screen w-full flex-col bg-muted/40">
+      <main className="flex min-h-screen w-full flex-col bg-muted/60">
         <DesktopNav />
-        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-40">
+        <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-60">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <MobileNav />
-            <SearchInput />
-            <User />
+            {/* ユーザと検索窓 */}
+            {/* <SearchInput /> */}
+            {/* <User /> */}
           </header>
           <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 bg-muted/40">
             {children}
@@ -64,61 +65,24 @@ export default function DashboardLayout({
 function DesktopNav() {
   return (
     // 横幅を w-40 から w-52（少し広め）に変更し、文字がゆったり入るようにします
-    <aside className="fixed inset-y-0 left-0 z-10 hidden w-40 flex-col border-r bg-background sm:flex">
+    <aside className="fixed inset-y-0 left-0 z-10 hidden flex-col border-r bg-background sm:flex w-60">
       <nav className="flex flex-col items-start gap-1 px-4 py-6 w-full">
         {/* メニュー全体の小さな見出し（デザインのアクセントになります） */}
         <div className="px-3 mb-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground/70">
           管理メニュー
         </div>
 
-        <NavItem href="/" label="コンテスト管理" />
-        <NavItem href="/test" label="問題管理" />
-        <NavItem href="/test" label="ユーザ管理" />
+        <NavItem href="/admin_contest" label="コンテスト管理" />
+        <NavItem href="/questions" label="問題管理" />
+        <NavItem href="/users" label="ユーザ管理" />
       </nav>
 
       <nav className="mt-auto flex flex-col items-start px-4 py-4 w-full border-t">
-        <NavItem href="/settings" label="ログアウト" />
+        <NavItem href="/login" label="ログアウト" />
       </nav>
     </aside>
   );
 }
-
-// function DesktopNav() {
-//   return (
-//     <aside className="fixed inset-y-0 left-0 z-10 hidden w-40 flex-col border-r bg-background sm:flex">
-//       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
-//         {/* <Link
-//           href="https://vercel.com/templates/next.js/admin-dashboard-tailwind-postgres-react-nextjs"
-//           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-//         >
-//           <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" />
-//           <span className="sr-only">Acme Inc</span>
-//         </Link> */}
-
-//         <a href="#" className="text-sm font-medium">コンテスト管理</a>
-
-//         <a href="#" className="text-sm font-medium">問題管理</a>
-
-//         <a href="#" className="text-sm font-medium">ユーザ管理</a>
-
-//       </nav>
-//       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
-//         <Tooltip>
-//           <TooltipTrigger asChild>
-//             <Link
-//               href="#"
-//               className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-//             >
-//               <Settings className="h-5 w-5" />
-//               <span className="sr-only">Settings</span>
-//             </Link>
-//           </TooltipTrigger>
-//           <TooltipContent side="right">Settings</TooltipContent>
-//         </Tooltip>
-//       </nav>
-//     </aside>
-//   );
-// }
 
 function MobileNav() {
   return (

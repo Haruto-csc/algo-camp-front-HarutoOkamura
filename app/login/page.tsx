@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -18,24 +19,16 @@ export default function LoginPage() {
           <CardDescription>
             ID
           </CardDescription>
-          <Input id="id" type="id" required/>
+          <Input id="id" type="text" required/>
           <CardDescription>
             Password
           </CardDescription>
           <Input id="password" type="password" required />
         </CardHeader>
         <CardFooter>
-          <form
-            action={async () => {
-              'use server';
-              await signIn('github', {
-                redirectTo: '/'
-              });
-            }}
-            className="w-full"
-          >
-            <Button className="w-full">ログイン</Button>
-          </form>
+          <Button asChild className="w-full">
+              <Link href="/">ログイン</Link>
+            </Button>
         </CardFooter>
       </Card>
     </div>

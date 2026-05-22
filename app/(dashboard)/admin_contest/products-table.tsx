@@ -55,9 +55,9 @@ export function ProductsTable({
     <Card>
       <CardHeader>
         <CardTitle>{titleMap[title]}</CardTitle>
-        <CardDescription>
+        {/* <CardDescription>
           Manage your products and view their sales performance.
-        </CardDescription>
+        </CardDescription> */}
       </CardHeader>
       <CardContent>
         <Table>
@@ -79,7 +79,8 @@ export function ProductsTable({
           </TableBody>
         </Table>
       </CardContent>
-      <CardFooter>
+      {/* 次のページボタンやコンテンスト数を表示するやつ */}
+      {/* <CardFooter>
         <form className="flex items-center w-full justify-between">
           <div className="text-xs text-muted-foreground">
             Showing{' '}
@@ -111,7 +112,7 @@ export function ProductsTable({
             </Button>
           </div>
         </form>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }

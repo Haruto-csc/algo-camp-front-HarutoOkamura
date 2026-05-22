@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ProductsTable } from './contests_table';
+import { ProductsTable } from './products-table';
+import Link from "next/link";
 
 export default function ProductsPage() {
   const [contests, setContests] = useState<any[]>([]);
@@ -30,16 +31,28 @@ export default function ProductsPage() {
   }, []);
 
   // 読み込み中の画面表示
-//   if (loading) {
-//     return (null);
-//   }
+  // if (loading) {
+  //   return (null);
+  // }
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4">
       <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-      開催中コンテスト一覧
+      コンテスト管理
     </h1>
     <Tabs defaultValue="all">
+      <div className="flex items-center">
+        <div className="ml-auto flex items-center gap-2">
+          <Button asChild size="sm" className="h-8 gap-1">
+            <Link href='/create-contest'>
+              <PlusCircle className="h-3.5 w-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                コンテストを追加
+              </span>
+            </Link>
+          </Button>
+        </div>
+      </div>
       <TabsContent value="all">
         {/* 以前設定した gap-10 の隙間を維持 */}
         <div className="flex flex-col gap-10">
@@ -48,6 +61,19 @@ export default function ProductsPage() {
             products={contests}
             offset={contests.length}
             totalProducts={contests.length}
+            title="schedule"
+          />
+          <ProductsTable
+            products={contests}
+            offset={contests.length}
+            totalProducts={contests.length}
+            title="inProgress"
+          />
+          <ProductsTable
+            products={contests}
+            offset={contests.length}
+            totalProducts={contests.length}
+            title="end"
           />
         </div>
       </TabsContent>

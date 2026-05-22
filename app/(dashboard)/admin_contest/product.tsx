@@ -3,10 +3,11 @@
 
 'use client';
 
+import Link from "next/link";
 import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Trash2 } from 'lucide-react';
-import { deleteProduct } from './actions'; 
+import { deleteProduct } from '../actions'; 
 
 // Supabaseのデータ構造の定義
 interface Contest {
@@ -49,15 +50,16 @@ export function Product({ product, title }: { product: Contest, title: 'schedule
           親の「アクション」に対応（現在は中身は空ですが、列の数を合わせるために必須です） */}
       <TableCell className={title === 'schedule' ? '' : 'invisible'}>
         <Button
+          asChild
           variant="outline"
           size="sm"
           className="h-8 px-3 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-          onClick={() => {
-            // ここに編集画面を開く処理（モーダルを開く、またはページ遷移など）を書きます
-            console.log(`${product.id} の編集ボタンが押されました`);
-          }}
+          // onClick={() => {
+          //   // ここに編集画面を開く処理（モーダルを開く、またはページ遷移など）を書きます
+          //   console.log(`${product.id} の編集ボタンが押されました`);
+          // }}
         >
-          編集
+          <Link href='/edit-contest'>編集</Link>
         </Button>
       </TableCell>
 
