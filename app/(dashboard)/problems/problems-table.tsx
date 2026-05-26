@@ -20,22 +20,22 @@ import {
 } from '@/components/ui/card';
 
 // question.tsxを作成し、それと紐づける
-// import { Product } from './product';
+import { Problem } from './problem';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export function ProductsTable({
-  products,
+export function ProblemsTable({
+  problems,
   offset,
-  totalProducts,
+  totalProblems,
 }: {
-  products: any[];
+  problems: any[];
   offset: number;
-  totalProducts: number;
+  totalProblems: number;
 }) {
   let router = useRouter();
-  let productsPerPage = 5;
+  let problemsPerPage = 5;
 
   function prevPage() {
     router.back();
@@ -63,11 +63,11 @@ export function ProductsTable({
               </TableHead>
             </TableRow>
           </TableHeader>
-          {/* <TableBody>
-            {products.map((product) => (
-              <Product key={product.id} product={product} title={title}/>
+          <TableBody>
+            {problems.map((problem) => (
+              <Problem key={problem.id} problem={problem}/>
             ))}
-          </TableBody> */}
+          </TableBody>
         </Table>
       </CardContent>
     </Card>

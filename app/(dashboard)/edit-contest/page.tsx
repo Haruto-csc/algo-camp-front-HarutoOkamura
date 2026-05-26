@@ -23,7 +23,7 @@ export default function ProductsPage() {
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4">
-        <Button asChild variant="ghost"><Link href="/admin_contest">＜ 戻る</Link></Button>
+        <Button asChild variant="ghost"><Link href="/admin-contest">＜ 戻る</Link></Button>
         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
         コンテスト編集
         </h1>
@@ -51,7 +51,7 @@ export default function ProductsPage() {
             </div>
         </div>
         <div className='flex justify-center'>
-            <Button asChild><Link href="/admin_contest">更新</Link></Button>
+            <Button asChild><Link href="/admin-contest">更新</Link></Button>
         </div>
     </div>
   );

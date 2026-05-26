@@ -72,8 +72,8 @@ function DesktopNav() {
           管理メニュー
         </div>
 
-        <NavItem href="/admin_contest" label="コンテスト管理" />
-        <NavItem href="/questions" label="問題管理" />
+        <NavItem href="/admin-contest" label="コンテスト管理" />
+        <NavItem href="/problems" label="問題管理" />
         <NavItem href="/users" label="ユーザ管理" />
       </nav>
 
