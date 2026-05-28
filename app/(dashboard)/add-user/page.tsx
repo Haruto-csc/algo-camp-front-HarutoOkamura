@@ -1,53 +1,218 @@
-// // Admin_コンテスト管理画面
-
-
 'use client';
 
 import Link from "next/link";
-import { useEffect, useState } from 'react';
-import { Tabs, TabsContent } from '@/components/ui/tabs';
-import { PlusCircle } from 'lucide-react';
+import { useRouter } from "next/navigation";
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-// import { Input } from 'postcss';
-import { Input } from "@/components/ui/input"
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter
+} from "@/components/ui/dialog";
+import { check } from "prettier";
 
 export default function ProductsPage() {
-  const [contests, setContests] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        name: "",
+        login_id: "",
+        login_password: "",
+        check_password: ""
+    });
 
-  // 読み込み中の画面表示
-//   if (loading) {
-//     return (null);
-//   }
 
-  return (
-    <div className="w-full max-w-7xl mx-auto p-4">
-        <Button asChild variant="ghost"><Link href="/users">＜ 戻る</Link></Button>
-        <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-        ユーザ作成
-        </h1>
-        <div className='flex flex-col gap-10 mx-auto p-20'>
-            <div>
-                <p>ユーザ名</p>
-                <Input className="max-w-xs" id="contestname" type="text" required />
-            </div>
-            <div>
-                <p>ログインID</p>
-                <Input className="max-w-xs" id="contestname" type="text" required />
-            </div>
-            <div>
-                <p>ログインパスワード</p>
-                <Input className="max-w-xs" id="contestname" type="password" required />
-            </div>
-            <div>
-                <p>ログインパスワード（再入力）</p>
-                <Input className="max-w-xs" id="contestname" type="password" required />
-            </div>
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    const handleOpenConfirm = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        setIsDialogOpen(true);
+    };
+
+    const handleActualSubmit = async () => {
+        setIsDialogOpen(false);
+        setLoading(true);
+
+        if (formData.login_password !== formData.check_password) {
+            alert("パスワードが一致していません。")
+            return;
+        }
+        // const payload = {
+        //     ...formData,
+        //     login_password: pass.firstpass
+        // };
+        const { check_password, ...payload } = formData;
+
+
+        try {
+            const response = await fetch("http://localhost:8000/users", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.detail || "アカウントの作成に失敗しました");
+            }
+
+            router.push("/users");
+
+        } catch (error: any) {
+            console.error(error);
+            alert(`エラー: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const allcheck = formData.name && formData.login_id && formData.login_password && formData.login_password === formData.check_password;
+
+    return (
+        <div className="w-full max-w-7xl mx-auto p-4">
+            <Button asChild variant="ghost"><Link href="/users">＜ 戻る</Link></Button>
+            <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
+                ユーザ作成
+            </h1>
+            <form onSubmit={handleOpenConfirm}>
+                <div className='flex flex-col gap-10 max-w-3xl mx-auto p-20'>
+                    <div>
+                        <p>ユーザ名</p>
+                        <Input
+                            className="w-full"
+                            name="name"
+                            type="text"
+                            value={formData.name}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <p>ログインID</p>
+                        <Input
+                            className="w-full"
+                            name="login_id"
+                            type="text"
+                            value={formData.login_id}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <p>ログインパスワード</p>
+                        <Input
+                            className="w-full"
+                            name="login_password"
+                            type="password"
+                            value={formData.login_password}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <p>ログインパスワード（再入力）</p>
+                        <Input
+                            className="w-full"
+                            name="check_password"
+                            type="password"
+                            value={formData.check_password}
+                            onChange={handleChange}
+                            required
+                        />
+                        {formData.check_password && formData.login_password !== formData.check_password ? (
+                            <p className="text-red-500 text-xs mt-1 h-4 leading-none">
+                                パスワードが一致していません。
+                            </p>
+                            ) : (
+                                <p className="invisible text-xs mt-1 h-4 leading-none"></p>
+                            )}
+                    </div>
+
+                </div>
+
+                <div className='flex justify-center'>
+                    <Button type="submit" disabled={loading || !allcheck} className="bg-zinc-900 hover:bg-zinc-500 text-white disabled:pointer-events-none px-8">
+                        作成
+                    </Button>
+                </div>
+            </form>
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent className="w-auto max-h-[85vh] overflow-y-auto">
+                    <DialogHeader>
+                        <DialogTitle className="text-center font-semibold">確認</DialogTitle>
+                    </DialogHeader>
+
+                    <div className="space-y-4 text-sm p-4">
+                        <p className="font-medium border-b pb-2">以下の情報でユーザを作成してよろしいですか？</p>
+
+                        <div>
+                            <span>ユーザ名</span>
+                            <p className="pl-2 font-mono bg-white p-2 rounded border text-xs">{formData.name}</p>
+                        </div>
+                        <div>
+                            <span>ログインID</span>
+                            <p className="pl-2 font-mono bg-white p-2 rounded border text-xs">{formData.login_id}</p>
+                        </div>
+                        <div>
+                            <span>パスワード</span>
+                            <p className="pl-2 font-mono bg-white p-2 rounded border text-xs">非表示</p>
+                        </div>
+
+                    </div>
+
+                    <DialogFooter className="flex justify-center gap-4 sm:justify-center">
+                        <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} className="px-6">
+                            いいえ
+                        </Button>
+                        <Button type="button" onClick={handleActualSubmit} className="bg-zinc-900 hover:bg-zinc-500 text-white disabled:pointer-events-none px-8">
+                            はい
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
         </div>
-        <div className='flex justify-center'>
-            <Button asChild><Link href="/admin-contest">作成</Link></Button>
-        </div>
-    </div>
-  );
+    );
 }
+
+//   return (
+//     <div className="w-full max-w-7xl mx-auto p-4">
+//         <Button asChild variant="ghost"><Link href="/users">＜ 戻る</Link></Button>
+//         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
+//         ユーザ作成
+//         </h1>
+//         <div className='flex flex-col gap-10 mx-auto p-20'>
+//             <div>
+//                 <p>ユーザ名</p>
+//                 <Input className="max-w-xs" id="contestname" type="text" required />
+//             </div>
+//             <div>
+//                 <p>ログインID</p>
+//                 <Input className="max-w-xs" id="contestname" type="text" required />
+//             </div>
+//             <div>
+//                 <p>ログインパスワード</p>
+//                 <Input className="max-w-xs" id="contestname" type="password" required />
+//             </div>
+//             <div>
+//                 <p>ログインパスワード（再入力）</p>
+//                 <Input className="max-w-xs" id="contestname" type="password" required />
+//             </div>
+//         </div>
+//         <div className='flex justify-center'>
+//             <Button asChild><Link href="/admin-contest">作成</Link></Button>
+//         </div>
+//     </div>
+//   );
+// }

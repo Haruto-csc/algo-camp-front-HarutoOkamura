@@ -36,11 +36,9 @@ export default function ProductsPage() {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
-        // 特殊な制限（カンマや数字チェック）をすべて消去し、これ1行だけにする
         setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
-    // 「作成」ボタンを押したとき：仕様に基づき、まずはダイアログを開く
     const handleOpenConfirm = (e: React.FormEvent) => {
         e.preventDefault();
 
@@ -52,12 +50,10 @@ export default function ProductsPage() {
         setIsDialogOpen(true);
     };
 
-    // ダイアログ内の「はい」を押したとき：実際にFastAPIのAPIを呼び出す
     const handleActualSubmit = async () => {
         setIsDialogOpen(false);
         setLoading(true);
 
-        // 送信用にデータを整形（カンマの除去や数値への型変換）
         const payload = {
             ...formData,
             time_limit: Number(formData.time_limit.replace(/,/g, "")),
@@ -78,7 +74,6 @@ export default function ProductsPage() {
                 throw new Error(errorData.detail || "問題の作成に失敗しました");
             }
 
-            // alert("問題を作成しました！");
             router.push("/admin-contest");
 
         } catch (error: any) {
