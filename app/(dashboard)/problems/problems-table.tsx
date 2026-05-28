@@ -1,6 +1,3 @@
-// 問題テーブル
-
-
 'use client';
 
 import {
@@ -19,23 +16,18 @@ import {
   CardTitle
 } from '@/components/ui/card';
 
-// question.tsxを作成し、それと紐づける
 import { Problem } from './problem';
 import { useRouter } from 'next/navigation';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 export function ProblemsTable({
   problems,
   offset,
-  totalProblems,
 }: {
   problems: any[];
   offset: number;
   totalProblems: number;
 }) {
   let router = useRouter();
-  let problemsPerPage = 5;
 
   function prevPage() {
     router.back();
@@ -47,9 +39,6 @@ export function ProblemsTable({
 
   return (
     <Card>
-      {/* <CardHeader>
-        <CardTitle>ここにコンテスト名入れたい</CardTitle>
-      </CardHeader> */}
       <CardContent>
         <Table>
           <TableHeader>

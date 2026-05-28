@@ -1,6 +1,3 @@
-// サイドバー等のレイアウト設定
-
-
 import Link from 'next/link';
 import {
   Home,
@@ -47,9 +44,6 @@ export default function DashboardLayout({
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-60">
           <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
             <MobileNav />
-            {/* ユーザと検索窓 */}
-            {/* <SearchInput /> */}
-            {/* <User /> */}
           </header>
           <main className="grid flex-1 items-start gap-2 p-4 sm:px-6 sm:py-0 md:gap-4 bg-muted/40">
             {children}
@@ -61,13 +55,10 @@ export default function DashboardLayout({
   );
 }
 
-// テスト（追加したコード）
 function DesktopNav() {
   return (
-    // 横幅を w-40 から w-52（少し広め）に変更し、文字がゆったり入るようにします
     <aside className="fixed inset-y-0 left-0 z-10 hidden flex-col border-r bg-background sm:flex w-60">
       <nav className="flex flex-col items-start gap-1 px-4 py-6 w-full">
-        {/* メニュー全体の小さな見出し（デザインのアクセントになります） */}
         <div className="px-3 mb-3 text-[11px] font-medium uppercase tracking-wider text-muted-foreground/70">
           管理メニュー
         </div>

@@ -99,7 +99,6 @@ export default function AdminContestCreate() {
                     <div>
                         <p className="mb-2">コンテストで実施する問題</p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
-                            
                             <div className="flex items-center gap-2">
                                 <span className="text-sm text-gray-500 w-6">1.</span>
                                 <select className="flex h-10 w-full rounded-md border p-2 text-sm" value={q1} onChange={(e) => setQ1(e.target.value)}>

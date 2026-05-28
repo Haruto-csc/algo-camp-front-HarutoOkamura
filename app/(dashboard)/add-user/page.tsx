@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 import {
     Dialog,
@@ -14,7 +13,6 @@ import {
     DialogTitle,
     DialogFooter
 } from "@/components/ui/dialog";
-// import { check } from "prettier";
 
 export default function ProductsPage() {
     const router = useRouter();
@@ -47,10 +45,6 @@ export default function ProductsPage() {
             alert("パスワードが一致していません。")
             return;
         }
-        // const payload = {
-        //     ...formData,
-        //     login_password: pass.firstpass
-        // };
         const { check_password, ...payload } = formData;
 
 
@@ -185,34 +179,3 @@ export default function ProductsPage() {
         </div>
     );
 }
-
-//   return (
-//     <div className="w-full max-w-7xl mx-auto p-4">
-//         <Button asChild variant="ghost"><Link href="/users">＜ 戻る</Link></Button>
-//         <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">
-//         ユーザ作成
-//         </h1>
-//         <div className='flex flex-col gap-10 mx-auto p-20'>
-//             <div>
-//                 <p>ユーザ名</p>
-//                 <Input className="max-w-xs" id="contestname" type="text" required />
-//             </div>
-//             <div>
-//                 <p>ログインID</p>
-//                 <Input className="max-w-xs" id="contestname" type="text" required />
-//             </div>
-//             <div>
-//                 <p>ログインパスワード</p>
-//                 <Input className="max-w-xs" id="contestname" type="password" required />
-//             </div>
-//             <div>
-//                 <p>ログインパスワード（再入力）</p>
-//                 <Input className="max-w-xs" id="contestname" type="password" required />
-//             </div>
-//         </div>
-//         <div className='flex justify-center'>
-//             <Button asChild><Link href="/admin-contest">作成</Link></Button>
-//         </div>
-//     </div>
-//   );
-// }

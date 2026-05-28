@@ -27,9 +27,7 @@ export default async function Page() {
         </div>
       </div>
       <TabsContent value="all">
-        {/* 以前設定した gap-10 の隙間を維持 */}
         <div className="flex flex-col gap-10">
-          {/* 4. getProducts の代わりに、FastAPIから取ってきた本物のデータ（contests）を流し込む！ */}
           <UsersTable
             users={users}
             offset={users.length}

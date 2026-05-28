@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Trash2 } from 'lucide-react';
 
-// Dialogパーツのインポート
 import {
     Dialog,
     DialogContent,
@@ -26,15 +25,12 @@ interface ProblemStructure {
 export function Problem({ problem }: { problem: ProblemStructure }) {
     const router = useRouter();
     const [isDeleting, setIsDeleting] = useState(false);
-    const [isDialogOpen, setIsDialogOpen] = useState(false); // ダイアログの開閉状態
-
-    // ダイアログ内の「削除」ボタンが押された時の実際の処理
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const handleActualDelete = async () => {
-        setIsDialogOpen(false); // ダイアログを閉じる
+        setIsDialogOpen(false);
         setIsDeleting(true);
 
         try {
-            // 仕様書通り、URLの末尾にIDを付与してDELETEリクエストを送信
             const response = await fetch(`http://127.0.0.1:8000/problems/${problem.id}`, {
                 method: "DELETE",
                 headers: {
@@ -47,7 +43,6 @@ export function Problem({ problem }: { problem: ProblemStructure }) {
                 throw new Error(errorData.detail || "問題の削除に失敗しました");
             }
 
-            // 画面を最新の状態に更新（一覧から消える）
             router.refresh();
 
         } catch (error: any) {
@@ -61,16 +56,9 @@ export function Problem({ problem }: { problem: ProblemStructure }) {
     return (
         <>
             <TableRow>
-                {/* 問題名 */}
                 <TableCell className="font-medium">{problem.name}</TableCell>
-
-                {/* 実行時間制限 */}
                 <TableCell>{problem.time_limit} ms</TableCell>
-
-                {/* メモリ制限 */}
                 <TableCell>{problem.memory_limit} GB</TableCell>
-
-                {/* アクション（編集） */}
                 <TableCell>
                     <Button
                         asChild

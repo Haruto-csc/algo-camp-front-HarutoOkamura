@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { Trash2 } from 'lucide-react';
-
-// Dialogパーツのインポート
 import {
     Dialog,
     DialogContent,
@@ -33,7 +31,6 @@ export function User({ user }: { user: UserStructure }) {
         setIsDeleting(true);
 
         try {
-            // 仕様書通り、URLの末尾にIDを付与してDELETEリクエストを送信
             const response = await fetch(`http://127.0.0.1:8000/users/${user.id}`, {
                 method: "DELETE",
                 headers: {
@@ -46,7 +43,6 @@ export function User({ user }: { user: UserStructure }) {
                 throw new Error(errorData.detail || "問題の削除に失敗しました");
             }
 
-            // 画面を最新の状態に更新（一覧から消える）
             router.refresh();
 
         } catch (error: any) {
@@ -102,17 +98,17 @@ export function User({ user }: { user: UserStructure }) {
                     </div>
 
                     <DialogFooter className="flex justify-center gap-3 sm:justify-center">
-                        <Button 
-                            type="button" 
-                            variant="outline" 
-                            onClick={() => setIsDialogOpen(false)} 
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => setIsDialogOpen(false)}
                             className="px-6 border-zinc-200 text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 transition-colors"
                         >
                             戻る
                         </Button>
-                        <Button 
-                            type="button" 
-                            onClick={handleActualDelete} 
+                        <Button
+                            type="button"
+                            onClick={handleActualDelete}
                             className="bg-red-600 hover:bg-red-700 text-white px-6 transition-colors"
                         >
                             削除する

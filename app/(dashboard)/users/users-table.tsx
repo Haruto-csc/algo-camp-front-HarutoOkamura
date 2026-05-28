@@ -1,6 +1,3 @@
-// 問題テーブル
-
-
 'use client';
 
 import {
@@ -21,34 +18,27 @@ import {
 
 import { User } from './user';
 import { useRouter } from 'next/navigation';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 export function UsersTable({
   users,
   offset,
-  totalUsers,
 }: {
   users: any[];
   offset: number;
   totalUsers: number;
 }) {
   let router = useRouter();
-  let usersPerPage = 5;
 
-  function prevPage() {
-    router.back();
-  }
+  // function prevPage() {
+  //   router.back();
+  // }
 
-  function nextPage() {
-    router.push(`/?offset=${offset}`, { scroll: false });
-  }
+  // function nextPage() {
+  //   router.push(`/?offset=${offset}`, { scroll: false });
+  // }
 
   return (
     <Card>
-      {/* <CardHeader>
-        <CardTitle>ここにコンテスト名入れたい</CardTitle>
-      </CardHeader> */}
       <CardContent>
         <Table>
           <TableHeader>
