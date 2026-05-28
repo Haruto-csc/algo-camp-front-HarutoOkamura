@@ -19,24 +19,22 @@ import {
   CardTitle
 } from '@/components/ui/card';
 
-// question.tsxを作成し、それと紐づける
-// import { Product } from './product';
+import { User } from './user';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-export function ProductsTable({
-  products,
+export function UsersTable({
+  users,
   offset,
-  totalProducts,
+  totalUsers,
 }: {
-  products: any[];
+  users: any[];
   offset: number;
-  totalProducts: number;
-  title: 'schedule' | 'inProgress' | 'end';
+  totalUsers: number;
 }) {
   let router = useRouter();
-  let productsPerPage = 5;
+  let usersPerPage = 5;
 
   function prevPage() {
     router.back();
@@ -63,11 +61,11 @@ export function ProductsTable({
               </TableHead>
             </TableRow>
           </TableHeader>
-          {/* <TableBody>
-            {products.map((product) => (
-              <Product key={product.id} product={product} title={title}/>
+          <TableBody>
+            {users.map((user) => (
+              <User key={user.id} user={user}/>
             ))}
-          </TableBody> */}
+          </TableBody>
         </Table>
       </CardContent>
     </Card>

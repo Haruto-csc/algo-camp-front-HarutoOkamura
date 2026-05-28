@@ -27,7 +27,7 @@ export default function LoginPage() {
         </CardHeader>
         <CardFooter>
           <Button asChild className="w-full">
-              <Link href="/">ログイン</Link>
+              <Link href="/admin-contest">ログイン</Link>
             </Button>
         </CardFooter>
       </Card>

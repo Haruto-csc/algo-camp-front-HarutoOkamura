@@ -14,7 +14,7 @@ import {
     DialogTitle,
     DialogFooter
 } from "@/components/ui/dialog";
-import { check } from "prettier";
+// import { check } from "prettier";
 
 export default function ProductsPage() {
     const router = useRouter();
@@ -132,7 +132,7 @@ export default function ProductsPage() {
                             required
                         />
                         {formData.check_password && formData.login_password !== formData.check_password ? (
-                            <p className="text-red-500 text-xs mt-1 h-4 leading-none">
+                            <p className="text-red-500 text-xs mt-1h-4 leading-none">
                                 パスワードが一致していません。
                             </p>
                             ) : (

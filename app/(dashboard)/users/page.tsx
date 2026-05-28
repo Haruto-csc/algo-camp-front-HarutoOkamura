@@ -1,40 +1,12 @@
-// // Admin_コンテスト管理画面
-
-
-'use client';
-
-import { useEffect, useState } from 'react';
 import { Tabs, TabsContent } from '@/components/ui/tabs';
 import { PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ProductsTable } from './users-table';
+import { UsersTable } from './users-table';
 import Link from "next/link";
 
-
-export default function ProductsPage() {
-  const [contests, setContests] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  // もうしこし理解が必要
-  useEffect(() => {
-    fetch('http://localhost:8000/api/test')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status === 'success') {
-          setContests(data.data); // 取ってきた配列を保存
-        }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('FastAPIからのデータ取得に失敗:', err);
-        setLoading(false);
-      });
-  }, []);
-
-  // 読み込み中の画面表示
-  // if (loading) {
-  //   return (null);
-  // }
+export default async function Page() {
+  const data = await fetch('http://127.0.0.1:8000/users', { cache: 'no-store' })
+  const users = await data.json();
 
   return (
     <div className="w-full max-w-7xl mx-auto p-4">
@@ -58,11 +30,10 @@ export default function ProductsPage() {
         {/* 以前設定した gap-10 の隙間を維持 */}
         <div className="flex flex-col gap-10">
           {/* 4. getProducts の代わりに、FastAPIから取ってきた本物のデータ（contests）を流し込む！ */}
-          <ProductsTable
-            products={contests}
-            offset={contests.length}
-            totalProducts={contests.length}
-            title="schedule"
+          <UsersTable
+            users={users}
+            offset={users.length}
+            totalUsers={users.length}
           />
         </div>
       </TabsContent>
