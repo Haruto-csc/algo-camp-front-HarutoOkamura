@@ -74,7 +74,7 @@ export default function ProductsPage() {
                 throw new Error(errorData.detail || "問題の作成に失敗しました");
             }
 
-            router.push("/admin-contest");
+            router.push("/problems");
 
         } catch (error: any) {
             console.error(error);
