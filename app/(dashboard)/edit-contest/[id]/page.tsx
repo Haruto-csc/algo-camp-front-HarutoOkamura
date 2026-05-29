@@ -75,7 +75,7 @@ export default function AdminContestCreate() {
     return (
         <div className="w-full max-w-7xl mx-auto p-4">
             <Button asChild variant="ghost"><Link href="/admin-contest">＜ 戻る</Link></Button>
-            <h1 className="text-2xl font-bold text-center mb-6">コンテスト作成</h1>
+            <h1 className="text-2xl font-bold text-center mb-6">コンテスト編集</h1>
 
             <form onSubmit={handleFormSubmit}>
                 <div className='flex flex-col gap-10 mx-auto p-20 max-w-4xl'>
@@ -185,7 +185,7 @@ export default function AdminContestCreate() {
                 </div>
 
                 <div className='flex justify-center'>
-                    <Button type="submit">作成</Button>
+                    <Button type="submit">更新</Button>
                 </div>
             </form>
 
